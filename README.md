@@ -1,6 +1,6 @@
 # Python_pratice
 
-初始畫面
+初始畫面<br>
 ![image](https://github.com/ShinBei/Python_pratice/blob/master/image.JPG)<br>
 可以透過點選File->Open來選擇jpg或png的菜單圖片<br>
 ![image](https://github.com/ShinBei/Python_pratice/blob/master/image2.JPG)<br>
