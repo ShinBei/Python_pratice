@@ -1,6 +1,8 @@
 import tkinter as tk
 import time
 import webbrowser
+from tkinter.filedialog import askopenfilename
+import cv2
 
 class Application(tk.Frame):
     def __init__(self, master=None):
@@ -9,6 +11,22 @@ class Application(tk.Frame):
         root.title("網路開啟")
         
         self.createWidgets()
+        
+    def OpenFile(self):
+        name = askopenfilename(initialdir="C:/Users",
+                               filetypes =(("PNG", "*.png"),("JPEG", "*.jpg"),("All Files","*.*")),
+                               title = "Choose a file."
+                               )
+        print (name)
+        #Using try in case user types in unknown file or closes without choosing a file.
+        try:
+            #with open(name,'r') as UseFile:
+                #print(UseFile.read())
+            im = cv2.imread('%s'%str(name))
+            cv2.imshow('im', im)
+            cv2.waitKey(0)
+        except:
+            print("No file exists")
 
     def createWidgets(self):
         self.Text_1 = tk.Label(self)
@@ -41,7 +59,9 @@ class Application(tk.Frame):
         
         self.meau = tk.Menu(self)
         filemenu = tk.Menu(self.meau, tearoff=0)
-        self.meau.add_cascade(label="Reset", command = self.Reset)
+        self.meau.add_cascade(label="File", menu = filemenu)
+        filemenu.add_command(label="Open", command = self.OpenFile)
+        filemenu.add_command(label="Reset", command = self.Reset)
         self.meau.add_cascade(label="Exit", command = root.destroy)
         root.config(menu = self.meau)       
         
@@ -50,7 +70,7 @@ class Application(tk.Frame):
         self.list.grid(row=1, column=3)
         
         
-        #filemenu.add_command(label="Reset", command = self.Reset)
+        
         
         
         #self.QUIT.Append(first,"File")
